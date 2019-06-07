@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const util = require('util');
-
-// ---
 const { uniqueId, project, rename } = require('../util');
 
 // --- Schema
@@ -53,15 +50,12 @@ const getOrCreateInstance = async (model, origInput) => {
   return inst.toObject();
 };
 
-const distinct = async ({ model, selection, filter }) =>
-  model.distinct(selection, filter);
+const distinct = async ({ model, selection, filter }) => model.distinct(selection, filter);
 
 // Build a list of sets based on the selection
 const union = async args => {
   const { model, selection, filter } = args;
-  const promises = selection.map(p =>
-    distinct({ model, selection: p, filter })
-  );
+  const promises = selection.map(p => distinct({ model, selection: p, filter }));
   const sets = await Promise.all(promises);
 
   // Flatten into a single list (with dupes)

@@ -1,22 +1,22 @@
 {
-  "name": "<your name>",
+  "name": "acme-service",
   "version": "1.0.0",
-  "description": "<your description>",
+  "description": "A service that does something",
   "main": "src/index.js",
-  "author": "<you>",
+  "author": "Acme, Inc.",
   "private": true,
   "scripts": {
     "dev": "nodemon src/index.js",
     "serve": "NODE_ENV=PRODUCTION node src/index.js"
   },
   "keywords": [
-    "<your keywords"
+    "Acme"
   ],
   "dependencies": {
-    "apollo-server-express": "^2.6.1",
+    "apollo-server-express": "^2.6.2",
     "express": "^4.17.1",
     "graphql": "^14.3.1",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.5.13",
     "schemaglue": "^4.0.4"
   },
   "devDependencies": {
@@ -25,11 +25,12 @@
     "eslint-config-node": "^4.0.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "nodemon": "^1.19.1",
-    "prettier": "^1.17.1"
+    "prettier": "^1.18.0"
   }
 }

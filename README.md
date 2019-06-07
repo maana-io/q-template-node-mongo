@@ -1,6 +1,6 @@
-# Q-ready NodeJS microservice template with support for MongoDB (incl. Azure CosmosDB)
+# Q-ready microservice for NodeJS with support for MongoDB (incl. Azure CosmosDB)
 
-This is a Maana Q-compatible project template supporting "modern JavaScript (ES2019)" and community best practices, including ESLint, Prettier, Docker, GraphQL, and Mongoose.
+This is a Maana Q-compatible project template supporting modern JavaScript (ES2019) and community best practices and technologies, including ESLint, Prettier, Docker, GraphQL, and Mongoose.
 
 ## Getting started
 

@@ -1,4 +1,4 @@
-const { find } = require('../db');
+const { find } = require('../../db');
 
 // --- GraphQL resolvers
 
