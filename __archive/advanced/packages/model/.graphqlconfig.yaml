@@ -1,6 +1,0 @@
-projects:
-  model:
-    schemaPath: schema.graphql
-    extensions:
-      endpoints:
-        default: 'http://localhost:8052'
