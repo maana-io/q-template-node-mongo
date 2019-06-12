@@ -1,5 +1,3 @@
-const { getOrCreateInstance } = require('../../db');
-
 // --- GraphQL resolvers
 
 const resolver = {

@@ -43,9 +43,5 @@ const server = new ApolloServer({ typeDefs, resolvers, context });
 server.applyMiddleware({ path, app });
 
 app.listen({ port }, () => {
-  console.log(
-    `🦄  maana-q-function-assist-helpers @ http://localhost:${port}${
-      server.graphqlPath
-    }`
-  );
+  console.log(`🦄  maana-q-function-assist-helpers @ http://localhost:${port}${server.graphqlPath}`);
 });
