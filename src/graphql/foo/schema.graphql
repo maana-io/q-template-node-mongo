@@ -10,6 +10,5 @@ type Query {
 
 type Mutation {
   createFoo(name: String!, bar: Int!): Foo!
-  getOrCreateFoo(name: String!, bar: Int!): Foo!
   deleteFoo(name: String!): Foo
 }
