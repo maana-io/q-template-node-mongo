@@ -1,13 +1,15 @@
 type Foo {
   name: String!
+  bar: Int!
 }
 
 type Query {
-  foo(name: String!): Foo
-  allFoos: [Foo!]!
+  foo(name: String!): [Foo!]!
+  totalBar: Int!
 }
 
 type Mutation {
-  createFoo(name: String!): Foo!
-  deleteFoo(name: String!): Int!
+  createFoo(name: String!, bar: Int!): Foo!
+  getOrCreateFoo(name: String!, bar: Int!): Foo!
+  deleteFoo(name: String!): Foo
 }

@@ -5,6 +5,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     index: true
+  },
+  bar: {
+    type: Number,
+    required: true
   }
 });
 

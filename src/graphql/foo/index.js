@@ -1,15 +1,18 @@
-const { find } = require('../../db');
+const { getOrCreateInstance } = require('../../db');
 
 // --- GraphQL resolvers
 
 const resolver = {
   Query: {
-    allFoos: async (_, args, { models }) => {},
-    foo: async (_, { name }, { models }) => {}
+    foo: async (_, { name }, { models }) => models.Foo.find({ name }),
+    totalBar: async (_, args, { models }) => {
+      const res = await models.Foo.find({});
+      return res.reduce((acc, foo) => acc + foo.bar, 0);
+    }
   },
   Mutation: {
-    createFoo: async (_, { name }, { models }) => {},
-    deleteFoo: async (_, { name }, { models }) => {}
+    createFoo: async (_, fooPrototype, { models }) => models.Foo.create(fooPrototype),
+    deleteFoo: async (_, fooFilter, { models }) => models.Foo.findOneAndDelete(fooFilter)
   }
 };
 

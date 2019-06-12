@@ -32,81 +32,7 @@ A _bare bones_ sample, **Foo**, has been provided that acts as a guide for where
 
 Under `src/db`, create one model file per file, then ensure they are included in the `index.js`.  A small sample has been provided for you to modify.
 
-## Mongoose Helpers
-
-A number of utility functions have been provided to simplify common access paterns.
-
-```
-// --- Helper functions
-
-const getOrCreateInstance = async (model, origInput) => {
-  // Work with a copy of the input
-  const input = { ...origInput };
-
-  // Autogen id, if not provided
-  if (!input.id) {
-    input.id = uniqueId(input);
-  }
-
-  // Perhaps it already exists
-  let inst = await model.findOne({ id: input.id });
-  if (!inst) {
-    inst = new model(input);
-    await inst.save();
-  }
-  return inst.toObject();
-};
-
-const distinct = async ({ model, selection, filter }) =>
-  model.distinct(selection, filter);
-
-// Build a list of sets based on the selection
-const union = async args => {
-  const { model, selection, filter } = args;
-  const promises = selection.map(p =>
-    distinct({ model, selection: p, filter })
-  );
-  const sets = await Promise.all(promises);
-
-  // Flatten into a single list (with dupes)
-  const flattened = [];
-  sets.forEach(set => flattened.push(...set));
-
-  // Unique-ify
-  const unique = new Set(flattened);
-
-  return [...unique]; // standard array
-};
-
-const find = async args => {
-  const { model, filter, projection, remap } = args;
-  if (!model) throw new Error(`find: missing model`);
-  if (!filter) throw new Error(`find: missing filter`);
-
-  const insts = await model.find(filter, projection);
-  // console.log('>>>> ', filter, insts);
-  if (!insts) return null;
-  return insts.map(inst => rename(inst.toObject(), remap));
-};
-
-const findOne = async args => {
-  const { model, filter, projection, remap } = args;
-  let inst = await model.findOne(filter);
-  if (!inst) return null;
-
-  inst = inst.toObject();
-  inst = projection ? project(inst, projection) : inst;
-  inst = remap ? rename(inst, remap) : inst;
-  return inst;
-};
-
-const exists = async args => {
-  const res = await findOne(args);
-  return !!res;
-};
-```
-
-## Schema Glue
+## GraphQL Schema
 
 Add your factored GraphQL schema and resolvers within sub-folders of `src/graphql`.  They will be merged together for ApolloServer.
 
@@ -118,10 +44,18 @@ Your resolvers will receive, as part of the standard GraphQL `Context`, the foll
 - the database object
 - all of your other resolvers (allowing resolvers to call each other internally)
 
+## Sample
+
+A minimal example has been provided to get you started with the template.  It includes a basic type, Foo, with two properties: _name_ (a string) and _bar_ (a number).  There are two mutations: _create_ and _delete_, and two queries: _foo_ (get by name) and _totalBar_, which fetches all the _Foo_ instances and sums their _bar_ properties.
+
+Replace `db/Foo.js` with your own database schema and include it in `db/index.js`.
+
+Replace `graphql/foo` with your own GraphQL schema and JavaScript resolvers.
+
 ## Deployment
 
-@@TODO
+The template includes a Dockerfile and two docker-compose files (development and production).
 
-## TODO
+## TODOs
 
 - Authentication with CKG
